@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>2nd Birthday Wishes 🎂</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🎉 I'm Turning 2 🎂</h1>
+
+    <img
+      src="assets/kid.jpg"
+      class="kid-photo"
+      alt="Kid Photo"
+    />
+
+    <p class="subtitle">
+      Hi 👶💖 Please leave me a sweet birthday wish!
+    </p>
+
+    <div class="question-card">
+      <label>Your Name 👋</label>
+      <input type="text" id="name">
+    </div>
+
+    <div class="question-card">
+      <label>Your Wish 💌</label>
+      <textarea id="wish"></textarea>
+    </div>
+
+    <div class="question-card">
+      <label>Advice For Me 🌟</label>
+      <input type="text" id="grow">
+    </div>
+
+    <div class="question-card">
+      <label>Favorite Memory 🍭</label>
+      <textarea id="memory"></textarea>
+    </div>
+
+    <button onclick="generateWishCard()">
+      💖 Send Wishes
+    </button>
+
+  </div>
+
+  <!-- POSTCARD -->
+  <div class="postcard" id="postcard">
+
+    <img
+      src="assets/kid.jpg"
+      class="postcard-photo"
+    />
+
+    <h2>🎂 Birthday Wishes 🎉</h2>
+
+    <div class="wish-box">
+      <h3>👋 From</h3>
+      <p id="cardName"></p>
+    </div>
+
+    <div class="wish-box">
+      <h3>💌 Wish</h3>
+      <p id="cardWish"></p>
+    </div>
+
+    <div class="wish-box">
+      <h3>🌟 Advice</h3>
+      <p id="cardGrow"></p>
+    </div>
+
+    <div class="wish-box">
+      <h3>🍭 Memory</h3>
+      <p id="cardMemory"></p>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
