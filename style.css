@@ -116,3 +116,16 @@ button{
   color:#ff4f87;
   margin-bottom:10px;
 }
+
+.gallery-btn{
+  display:block;
+  text-align:center;
+  margin-top:15px;
+  padding:14px;
+  border-radius:18px;
+  background:#fff0f5;
+  text-decoration:none;
+  color:#ff4f87;
+  font-weight:bold;
+  border:2px solid #ffd1df;
+}
