@@ -17,79 +17,132 @@
 
 <body>
 
-  <div class="container">
+<!-- MAIN CARD -->
+<div class="postcard live-card" id="postcard">
 
-    <h1>🎉 I'm Turning 2 🎂</h1>
+  <!-- TOP A6 -->
+  <div class="a6-card top-card">
 
-    <img
-      src="assets/kid.jpg"
-      class="kid-photo"
-      alt="Kid Photo"
-    />
+    <div class="top-content">
 
-    <p class="subtitle">
-      Hi 👶💖 Please leave me a sweet birthday wish!
-    </p>
+      <p class="red-text">🎂 హలో, నాకు రెండేళ్లు వచ్చేశాయి..
+        మీకు తెలు నాకు ఇష్టపడే పరిగెత్తడం
+        ఎక్కడ దొరుకుతుంది అని వచ్చేశాయి 🎉</p>
 
-    <div class="question-card">
-      <label>Your Name 👋</label>
-      <input type="text" id="name">
-    </div>
+      <p class="green-text">
+        నాకు ముఖ్యంగా కూడా నచ్చింది ఇంకా
+        చదవడం రాయడం రాలేదు.
+        అందుకే మీ ఆశీస్సులతో ఈ పుట్టినరోజుకు
+        మీ ఆశీస్సులతో పాటు కొన్ని విషయాలు
+        కూడా చెప్పారా. 💖
+      </p>
 
-    <div class="question-card">
-      <label>Your Wish 💌</label>
-      <textarea id="wish"></textarea>
-    </div>
+      <!-- PHOTO UPLOAD BOX -->
 
-    <div class="question-card">
-      <label>Advice For Me 🌟</label>
-      <input type="text" id="grow">
-    </div>
+      <label class="kid-photo-box">
 
-    <div class="question-card">
-      <label>Favorite Memory 🍭</label>
-      <textarea id="memory"></textarea>
-    </div>
+        <input
+                type="file"
+                id="photoInput"
+                accept="image/*"
+                hidden
+        />
 
-    <button onclick="generateWishCard()">
-      💖 Send Wishes
-    </button>
+        <!-- PREVIEW IMAGE -->
 
-  </div>
+        <img
+                id="previewImage"
+                class="preview-image"
+        />
 
-  <!-- POSTCARD -->
-  <div class="postcard" id="postcard">
+        <!-- PLACEHOLDER -->
 
-    <img
-      src="assets/kid.jpg"
-      class="postcard-photo"
-    />
+        <div
+                id="uploadPlaceholder"
+                class="upload-placeholder"
+        >
+          📷<br/>
+          Upload Photo
+        </div>
 
-    <h2>🎂 Birthday Wishes 🎉</h2>
-
-    <div class="wish-box">
-      <h3>👋 From</h3>
-      <p id="cardName"></p>
-    </div>
-
-    <div class="wish-box">
-      <h3>💌 Wish</h3>
-      <p id="cardWish"></p>
-    </div>
-
-    <div class="wish-box">
-      <h3>🌟 Advice</h3>
-      <p id="cardGrow"></p>
-    </div>
-
-    <div class="wish-box">
-      <h3>🍭 Memory</h3>
-      <p id="cardMemory"></p>
+      </label>
     </div>
 
   </div>
 
-  <script src="app.js"></script>
+  <!-- BOTTOM A6 -->
+  <div class="a6-card bottom-card">
+
+    <div class="wish-grid">
+
+      <div class="label">👋 మీ పేరు</div>
+
+      <input
+              type="text"
+              id="cardName"
+              class="wish-input"
+              placeholder=""
+      />
+
+      <div class="label">💌 పుట్టినరోజు నేను ఏమని పిలవాలి</div>
+
+      <textarea
+              id="cardWish"
+              class="wish-input"
+              placeholder=""
+      ></textarea>
+
+      <div class="label">🌟 నేను ఈ సంవత్సరం ఎలాంటి చిలిపి చేష్టలను
+        చేయకూడని మా అమ్మ నాన్నలకు కోసం చెప్పించాలి</div>
+
+      <textarea
+              id="cardGrow"
+              class="wish-input"
+              placeholder=""
+      ></textarea>
+
+      <div class="label">🍭 నేను పెద్దయ్యాక ఏమవ్వాలి అనుకుంటున్నారు</div>
+
+      <textarea
+              id="cardMemory"
+              class="wish-input memory-box"
+              placeholder=""
+      ></textarea>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ACTION BUTTON -->
+<div class="action-area">
+
+  <button onclick="generateWishCard()">
+    💖 Send Wishes
+  </button>
+
+  <a href="gallery.html" class="gallery-btn">
+    🎁 View All Wishes
+  </a>
+
+</div>
+<!-- LOADER -->
+
+<div class="loader-overlay" id="loaderOverlay">
+
+  <div class="loader-box">
+
+    <div class="spinner"></div>
+
+    <div class="loader-text">
+      Sending Wishes 💖
+    </div>
+
+  </div>
+
+</div>
+<script src="app.js"></script>
 
 </body>
 </html>

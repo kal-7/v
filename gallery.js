@@ -38,7 +38,8 @@ async function loadGallery(){
     return;
   }
 
-  data.forEach(file => {
+  data.filter(file => file.name.includes("wish"))
+.forEach(file => {
 
     const imageUrl =
       `${SUPABASE_URL}/storage/v1/object/public/wishes/${file.name}`;

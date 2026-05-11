@@ -16,49 +16,93 @@ const supabaseClient = supabase.createClient(
 
 async function generateWishCard(){
 
-  const name = document.getElementById("name").value;
-  const wish = document.getElementById("wish").value;
-  const grow = document.getElementById("grow").value;
-  const memory = document.getElementById("memory").value;
+  const postcard =
+    document.getElementById("postcard");
 
-  // Fill postcard
-  document.getElementById("cardName").innerText = name;
-  document.getElementById("cardWish").innerText = wish;
-  document.getElementById("cardGrow").innerText = grow;
-  document.getElementById("cardMemory").innerText = memory;
+  // Hide buttons while exporting
+  document.querySelector(".action-area")
+    .style.display = "none";
 
-  const postcard = document.getElementById("postcard");
+  await document.fonts.ready;
 
-  postcard.style.display = "block";
+  const canvas = await html2canvas(postcard, {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: "#ffffff"
+  });
 
-  // Create image
-  const canvas = await html2canvas(postcard);
-
-  postcard.style.display = "none";
-
+  document.querySelector(".action-area")
+    .style.display = "block";
+document.getElementById("loaderOverlay")
+  .style.display = "flex";
   canvas.toBlob(async (blob) => {
 
-    const fileName = `wish-${Date.now()}.png`;
+    const fileName =
+      `wish-${Date.now()}.png`;
 
     // Upload to Supabase
-    const { data, error } = await supabaseClient
+    const { data, error } =
+      await supabaseClient
       .storage
       .from("wishes")
       .upload(fileName, blob);
 
     if(error){
       console.log(error);
-      alert("❌ Upload failed");
+      alert("Upload failed");
+      document.getElementById("loaderOverlay")
+        .style.display = "none";
       return;
     }
 
-    // Public URL
-    const imageUrl =
-      `${SUPABASE_URL}/storage/v1/object/public/wishes/${fileName}`;
+    const { data: publicData } =
+      supabaseClient
+      .storage
+      .from("wishes")
+      .getPublicUrl(fileName);
+document.getElementById("loaderOverlay")
+  .style.display = "none";
+    // Reload page after short delay
+    setTimeout(() => {
+      window.location.reload();
+    }, 1200);
 
-    console.log("Uploaded Image:", imageUrl);
-
-    alert("🎉 Wish uploaded successfully!");
+    console.log(publicData.publicUrl);
 
   }, "image/png");
 }
+
+// =======================
+// PHOTO PREVIEW
+// =======================
+
+const photoInput =
+  document.getElementById("photoInput");
+
+const previewImage =
+  document.getElementById("previewImage");
+
+const uploadPlaceholder =
+  document.getElementById("uploadPlaceholder");
+
+photoInput.addEventListener("change", (e) => {
+
+  const file = e.target.files[0];
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(event){
+
+    previewImage.src = event.target.result;
+
+    previewImage.style.display = "block";
+
+    uploadPlaceholder.style.display = "none";
+
+  };
+
+  reader.readAsDataURL(file);
+
+});
