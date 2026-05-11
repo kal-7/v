@@ -295,57 +295,156 @@ button:hover{
    MOBILE RESPONSIVE
 ========================= */
 
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media(max-width:900px){
+
+  body{
+    padding:18px 10px;
+  }
+
+  /* A4 CARD */
 
   .postcard{
     width:100%;
 
     min-height:auto;
 
-    padding:25px 0;
+    padding:18px 0;
 
-    gap:30px;
+    gap:22px;
+
+    border-radius:18px;
   }
+
+  /* A6 CARDS */
 
   .a6-card{
     width:95%;
 
-    height:auto;
+    height:260px;
 
-    min-height:380px;
+    border-radius:18px;
   }
 
-  .bottom-card{
-    padding:55px 25px;
-  }
+  /* TOP SECTION */
 
-  .wish-grid{
-    grid-template-columns:1fr;
+  .top-content{
+    width:68%;
 
-    gap:14px;
-  }
-
-  .label{
-    padding-top:0;
-
-    font-size:22px;
+    padding:18px;
   }
 
   .top-content h1{
-    font-size:38px;
+    font-size:22px;
+
+    margin-bottom:10px;
   }
 
   .top-content p{
-    font-size:20px;
+    font-size:7px;
+
+    line-height:1.4;
+
+    margin-bottom:8px;
   }
 
+  /* LABELS */
+
+  .label{
+    font-size:7px;
+
+    padding-top:4px;
+  }
+
+  /* GRID */
+
+  .wish-grid{
+    grid-template-columns:110px 1fr;
+
+    gap:10px 10px;
+  }
+
+  /* INPUTS */
+
   .wish-input{
-    font-size:18px;
+    font-size:7px;
+
+    padding:8px;
+
+    border-radius:10px;
+  }
+
+  textarea.wish-input{
+    min-height:22px;
+  }
+
+  .memory-box{
+    min-height:22px !important;
+  }
+
+  /* PHOTO BOX */
+
+  .kid-photo-box{
+    width:80px;
+    height:120px;
+width: 20vw;
+    height: 10vh;
+    right:10px;
+    bottom:10px;
+
+    border-radius:10px;
+  }
+
+  .upload-placeholder{
+    font-size:10px;
+  }
+
+  /* BUTTON AREA */
+
+  .action-area{
+    max-width:95%;
+
+    margin-top:20px;
   }
 
   button{
-    font-size:20px;
+    font-size:16px;
+
+    padding:14px;
+
+    border-radius:14px;
   }
+
+  .gallery-btn{
+    font-size:14px;
+
+    padding:12px;
+
+    border-radius:14px;
+  }
+
+  /* LOADER */
+
+  .loader-box{
+    padding:24px 28px;
+
+    border-radius:18px;
+  }
+
+  .spinner{
+    width:42px;
+    height:42px;
+
+    border-width:4px;
+  }
+
+  .loader-text{
+    font-size:18px;
+  }
+
 }
 
 /* =========================
@@ -428,8 +527,8 @@ button:hover{
   right:2vw;
   bottom:2vh;
 
-  width:10vw;
-  height:20vh;
+  width:90px;
+  height:90px;
 
   background:white;
 
