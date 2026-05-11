@@ -10,6 +10,9 @@ const supabaseClient = supabase.createClient(
   SUPABASE_ANON_KEY
 );
 
+// Store image URLs globally
+let allImages = [];
+
 // =======================
 // LOAD GALLERY
 // =======================
@@ -40,24 +43,120 @@ async function loadGallery(){
     const imageUrl =
       `${SUPABASE_URL}/storage/v1/object/public/wishes/${file.name}`;
 
+    allImages.push(imageUrl);
+
     const card = document.createElement("div");
 
     card.className = "card";
 
     card.innerHTML = `
-      <img src="${imageUrl}" />
-
-      <a
-        href="${imageUrl}"
-        download
-        target="_blank"
-        class="download-btn"
-      >
-        ⬇ Download Wish
-      </a>
+      <img src="${imageUrl}" loading="lazy" />
     `;
 
     galleryGrid.appendChild(card);
+
+  });
+
+}
+
+// =======================
+// DOWNLOAD ALL AS PDF
+// =======================
+
+async function downloadAllAsPDF(){
+
+  if(allImages.length === 0){
+    alert("No wishes found");
+    return;
+  }
+
+  const { jsPDF } = window.jspdf;
+
+  const pdf = new jsPDF({
+    orientation: "portrait",
+    unit: "mm",
+    format: "a4"
+  });
+
+  for(let i = 0; i < allImages.length; i++){
+
+    const imageUrl = allImages[i];
+
+    const img = await loadImage(imageUrl);
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    ctx.drawImage(img, 0, 0);
+
+const imgData = canvas.toDataURL("image/png");
+    if(i > 0){
+      pdf.addPage();
+    }
+
+// A4 page size
+const pageWidth = 210;
+const pageHeight = 297;
+
+// Margins
+const margin = 10;
+
+// Available area
+const maxWidth = pageWidth - margin * 2;
+const maxHeight = pageHeight - margin * 2;
+
+// Image ratio
+const imgRatio = img.width / img.height;
+
+// Calculate best fit without cropping
+let renderWidth = maxWidth;
+let renderHeight = renderWidth / imgRatio;
+
+// If height exceeds page
+if(renderHeight > maxHeight){
+  renderHeight = maxHeight;
+  renderWidth = renderHeight * imgRatio;
+}
+
+// Center image
+const x = (pageWidth - renderWidth) / 2;
+const y = (pageHeight - renderHeight) / 2;
+
+pdf.addImage(
+  imgData,
+  "JPEG",
+  x,
+  y,
+  renderWidth,
+  renderHeight
+);
+
+  }
+
+  pdf.save("birthday-wishes.pdf");
+
+}
+
+// =======================
+// IMAGE LOADER
+// =======================
+
+function loadImage(url){
+
+  return new Promise((resolve, reject) => {
+
+    const img = new Image();
+
+    img.crossOrigin = "anonymous";
+
+    img.onload = () => resolve(img);
+
+    img.onerror = reject;
+
+    img.src = url;
 
   });
 
