@@ -133,7 +133,7 @@ color:#3ca27a;
 .bottom-card{
   background-image:url('./assets/bottom-bg.jpg');
 
-  padding:70px 55px;
+  padding:10px 10px;
 }
 
 .wish-grid{
@@ -333,9 +333,7 @@ button:hover{
   /* TOP SECTION */
 
   .top-content{
-    width:68%;
-
-    padding:18px;
+    width:72%;
   }
 
   .top-content h1{
@@ -345,17 +343,17 @@ button:hover{
   }
 
   .top-content p{
-    font-size:7px;
+    font-size:10px;
 
     line-height:1.4;
 
-    margin-bottom:8px;
+    margin-top:8px;
   }
 
   /* LABELS */
 
   .label{
-    font-size:7px;
+    font-size:10px;
 
     padding-top:4px;
   }
@@ -363,7 +361,7 @@ button:hover{
   /* GRID */
 
   .wish-grid{
-    grid-template-columns:110px 1fr;
+    grid-template-columns:160px 1fr;
 
     gap:10px 10px;
   }
